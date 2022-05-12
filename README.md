@@ -52,3 +52,8 @@ v0.0.1
 1. 找到这个包(一般在`site-packages`目录下)，将`data_source.py`中的`Path(__file__).parent / "font" / "consola.ttf"`改为你自己想要的字体的路径；
 2. 在`__init__.py`同级目录创建文件夹，名为 `font`, 再下载本仓库中的字体放进去。
 3. 直接clone本仓库，安装好依赖，放在bot能导入到的文件夹下面 ~~（dddd）~~
+
+
+
+<br><br><br><br><br><br><br><br><br>
+感觉有点拉（各方面），大佬轻喷 ~~溜了溜了~~
