@@ -11,11 +11,11 @@
   </a>
   
   <a href="https://github.com/nonebot/nonebot2">
-    <img src="https://img.shields.io/badge/nonebot2-2.0.0beta.1-green">
+    <img src="https://img.shields.io/badge/nonebot2-2.0.0rc1-green">
   </a>
   
   <a href="">
-    <img src="https://img.shields.io/badge/release-v0.0.1-orange">
+    <img src="https://img.shields.io/badge/release-v0.0.3-orange">
   </a>
   
 </p>
@@ -23,9 +23,9 @@
 
 ## 版本
 
-v0.0.1
+v0.0.3
 
-⚠ 适配nonebot2-2.0.0beta.1；
+⚠ 适配nonebot2-2.0.0rc1；
 
 ## 安装
 
@@ -49,17 +49,6 @@ v0.0.1
 
 ## 问题
 
-### 版本适配问题
-参考 [nonebot_plugin_miragetank](https://github.com/RafuiiChan/nonebot_plugin_miragetank#版本适配问题)
-
-此外，`pic2text.handle`装饰的函数部分也要改，大概改成下面这样（即原来定义的参数位置互换一下，不然会报错）
-```python
-pic2text = on_command("字符画", priority=26, block=True)
-
-
-@pic2text.handle()
-async def _(state: T_State, args: Message = CommandArg()):
-```
 
 ### 缺资源
 （纯萌新，第一次发包，不太熟，没有字体的话可以尝试以下解决方案）

@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="nonebot_plugin_charpic",
-    version="0.0.2",
+    version="0.0.3",
     keywords=["pip", "nonebot_plugin_charpic"],
     description="Generate picture(or GIF) by character",
     long_description="Generate picture(or GIF) by character, for nonebot2 beta1",
@@ -20,7 +20,7 @@ setup(
         "pillow >= 8.4.0",
         "aiohttp",
         "imageio >= 2.9.0",
-        "nonebot2 >= 2.0.0b1",
+        "nonebot2 >= 2.0.0rc1",
         "nonebot-adapter-onebot >= 2.0.0b1",
     ],
 )
