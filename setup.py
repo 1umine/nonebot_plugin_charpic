@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="nonebot_plugin_charpic",
-    version="0.0.3",
+    version="0.0.4",
     keywords=["pip", "nonebot_plugin_charpic"],
     description="Generate picture(or GIF) by character",
     long_description="Generate picture(or GIF) by character, for nonebot2 beta1",
