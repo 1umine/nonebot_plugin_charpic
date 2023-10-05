@@ -7,7 +7,14 @@ from nonebot.plugin import PluginMetadata
 from .data_source import *
 
 
-__plugin_meta__ = PluginMetadata("charpic", "合成字符画", "/字符画 <图片>")
+__plugin_meta__ = PluginMetadata(
+    name="charpic",
+    description="合成字符画",
+    usage="/字符画 <图片>",
+    type="application",
+    homepage="https://github.com/1umine/nonebot_plugin_charpic",
+    supported_adapters={"onebot"},
+)
 
 pic2text = on_command("字符画", priority=26, block=True)
 

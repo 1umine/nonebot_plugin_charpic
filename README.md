@@ -11,11 +11,11 @@
   </a>
   
   <a href="https://github.com/nonebot/nonebot2">
-    <img src="https://img.shields.io/badge/nonebot2-2.0.0rc1-green">
+    <img src="https://img.shields.io/badge/nonebot2-2.0.1-green">
   </a>
   
   <a href="">
-    <img src="https://img.shields.io/badge/release-v0.0.3-orange">
+    <img src="https://img.shields.io/badge/release-v0.1.0-orange">
   </a>
   
 </p>
@@ -23,9 +23,9 @@
 
 ## 版本
 
-v0.0.4
+v0.1.0
 
-⚠ 适配nonebot2-2.0.0rc1；
+⚠ 适配nonebot2-2.0.1；
 
 ## 安装
 
@@ -45,7 +45,7 @@ v0.0.4
 
 `字符画` + `图片`
 
-⚠ 需要 nonebot2 配置的命令前缀，如果没配置默认 `/`  ~~（好像是吧）~~
+⚠ 需要 nonebot2 配置的命令前缀，如果没配置默认 `/` 
 
 ## 问题
 

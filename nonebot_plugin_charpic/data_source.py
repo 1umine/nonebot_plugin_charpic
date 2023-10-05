@@ -8,6 +8,7 @@ from PIL import Image, ImageDraw, ImageFont
 default_font, font_size = Path(__file__).parent / "font" / "consola.ttf", 15
 default_font = str(default_font)
 
+
 async def get_pic_text(_img: Image.Image, new_w: int = 150):
     if not _img:
         return
@@ -37,7 +38,7 @@ async def self_adaption_font_of_text(font_filename, default_font_size: int, text
     ttfont = ImageFont.truetype(font_filename, default_font_size)
     w, h = ttfont.getsize_multiline(text.strip())
 
-    return ttfont,w,h
+    return ttfont, w, h
 
 
 async def text2img(text: str):
