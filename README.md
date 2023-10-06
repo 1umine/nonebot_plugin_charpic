@@ -15,7 +15,7 @@
   </a>
   
   <a href="">
-    <img src="https://img.shields.io/badge/release-v0.1.0-orange">
+    <img src="https://img.shields.io/badge/release-v0.1.1-orange">
   </a>
   
 </p>
@@ -23,7 +23,7 @@
 
 ## 版本
 
-v0.1.0
+v0.1.1
 
 ⚠ 适配nonebot2-2.0.1；
 
