@@ -1,6 +1,6 @@
 [project]
 name = "nonebot-plugin-charpic"
-version = "0.1.1"
+version = "0.1.2"
 description = "Generate picture(or GIF) by characters"
 authors = [
     {name = "1umine", email = "a1628420979@163.com"},

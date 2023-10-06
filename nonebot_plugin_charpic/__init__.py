@@ -13,7 +13,7 @@ __plugin_meta__ = PluginMetadata(
     usage="/字符画 <图片>",
     type="application",
     homepage="https://github.com/1umine/nonebot_plugin_charpic",
-    supported_adapters={"onebot"},
+    supported_adapters={"~onebot.v11"},
 )
 
 pic2text = on_command("字符画", priority=26, block=True)
