@@ -9,23 +9,12 @@
   <a href="https://github.com/RafuiiChan/nonebot_plugin_charpic/blob/main/LICENSE">
     <img src="https://img.shields.io/badge/license-MIT-informational">
   </a>
-  
   <a href="https://github.com/nonebot/nonebot2">
     <img src="https://img.shields.io/badge/nonebot2-2.0.1-green">
   </a>
   
-  <a href="">
-    <img src="https://img.shields.io/badge/release-v0.1.1-orange">
-  </a>
-  
 </p>
 </p>
-
-## 版本
-
-v0.1.1
-
-⚠ 适配nonebot2-2.0.1；
 
 ## 安装
 

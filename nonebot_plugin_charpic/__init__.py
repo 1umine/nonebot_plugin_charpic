@@ -1,5 +1,5 @@
 from nonebot import on_command
-from nonebot.adapters.onebot.v11 import Bot, Event, MessageSegment, Message
+from nonebot.adapters.onebot.v11 import MessageSegment, Message
 from nonebot.typing import T_State
 from nonebot.params import CommandArg
 from nonebot.plugin import PluginMetadata
@@ -27,7 +27,7 @@ async def _(state: T_State, args: Message = CommandArg()):
 
 
 @pic2text.got("image", prompt="图呢？")
-async def generate_(bot: Bot, event: Event, state: T_State):
+async def generate_(state: T_State):
     msg = state["image"]
     if msg[0].type == "image":
         url = msg[0].data["url"]  # 图片链接
@@ -35,7 +35,7 @@ async def generate_(bot: Bot, event: Event, state: T_State):
 
         pic = await get_img(url)  # 取图
         if not pic:
-            await pic2text.finish(event, message="图片未获取到，请稍后再试")
+            await pic2text.finish(message="图片未获取到，请稍后再试")
 
         if pic.format == "GIF":
             res = await char_gif(pic)
