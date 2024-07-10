@@ -1,17 +1,18 @@
 import io
-from typing import List
 import imageio
-import aiohttp
+import httpx
+
+from typing import List
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
+from nonebot.log import logger
 
-default_font, font_size = Path(__file__).parent / "font" / "consola.ttf", 15
+default_font, font_size = Path(__file__).parent / "font" / "consola.ttf", 14
 default_font = str(default_font)
+util_draw = ImageDraw.Draw(Image.new("L", (1, 1)))
 
 
 async def get_pic_text(_img: Image.Image, new_w: int = 150):
-    if not _img:
-        return
     str_map = "@@$$&B88QMMGW##EE93SPPDOOU**==()+^,\"--''.  "
     n = len(str_map)
     img = _img.convert("L")
@@ -25,70 +26,70 @@ async def get_pic_text(_img: Image.Image, new_w: int = 150):
     for x in range(img.height):
         for y in range(img.width):
             gray_v = img.getpixel((y, x))
-            s += str_map[int(n * (gray_v / 256))]
+            s += str_map[int(n * (gray_v / 256))]  # type: ignore
         s += "\n"
     return s
 
 
-async def self_adaption_font_of_text(font_filename, default_font_size: int, text: str):
+async def text_wh(
+    font_filename, default_font_size: int, text: str
+) -> tuple[ImageFont.FreeTypeFont, int, int]:
     """
     获取一段文本所占的宽度像素值
     返回字符画的 width, height
     """
     ttfont = ImageFont.truetype(font_filename, default_font_size)
-    w, h = ttfont.getsize_multiline(text.strip())
-
-    return ttfont, w, h
+    try:
+        w, h = ttfont.getsize_multiline(text.strip())  # type: ignore
+        return ttfont, w, h
+    except AttributeError:  # PIL >= 10.0
+        bbox: tuple[int, int, int, int] = util_draw.multiline_textbbox((0, 0), text, font=ttfont)  # type: ignore
+        return ttfont, bbox[2], bbox[3]
 
 
 async def text2img(text: str):
-    font, w, h = await self_adaption_font_of_text(default_font, font_size, text)
+    font, w, h = await text_wh(default_font, font_size, text)
     img = Image.new("L", (w, h), "#FFFFFF")
     draw = ImageDraw.Draw(img)
     draw.text((0, 0), text, fill="#000000", font=font)
-    output = io.BytesIO()
-    img.save(output, format="jpeg")
-    return output
+    return img
 
 
 async def char_gif(gif: Image.Image):
     """
     合成 gif 字符画
     """
-    frame_list: List[str] = []
+    frame_list: List[Image.Image] = []
     try:
         while True:
             t = gif.tell()
-            frame_list.append(await get_pic_text(gif, new_w=80))
+            frame = await text2img(await get_pic_text(gif, new_w=80))
+            frame_list.append(frame)
             gif.seek(t + 1)
     except EOFError:
         pass
-    font, w, h = await self_adaption_font_of_text(
-        default_font, font_size, frame_list[0]
-    )
-    for i in range(len(frame_list)):
-        img = await get_char_frame(frame_list[i], w, h, font)
-        frame_list[i] = img
     output = io.BytesIO()
-    imageio.mimsave(output, frame_list, format="gif", duration=0.08)
-
+    imageio.mimsave(output, frame_list, format="gif", duration=0.08)  # type: ignore
     return output
 
 
-async def get_char_frame(text: str, w: int, h: int, font_):
-    img = Image.new("L", (w, h), "#FFFFFF")
-    draw = ImageDraw.Draw(img)
-    draw.text((0, 0), text, fill="#000000", font=font_)
-    return img
+async def char_pic(img: Image.Image):
+    if not img:
+        return
+    text = await get_pic_text(img)
+    img = await text2img(text)
+    output = io.BytesIO()
+    img.save(output, format="jpeg")
+    return output
 
 
 async def get_img(img_url: str):
     if not img_url:
         return
-    async with aiohttp.ClientSession() as session:
-        async with session.get(img_url) as resp:
-            result = await resp.read()
-    if not result:
-        return None
-    img = Image.open(io.BytesIO(result))
-    return img
+    async with httpx.AsyncClient() as client:
+        result = await client.get(img_url)
+        if result.status_code != 200:
+            logger.warning(f"图片 {img_url} 下载失败: {result.status_code}")
+            return None
+        img = Image.open(io.BytesIO(result.content))
+        return img

@@ -1,16 +1,16 @@
 <div align="center">
 
-# 生成字符画（包括GIF）
+# 生成字符画（或GIF）
 
 </div>
 
 <p align="center">
   
-  <a href="https://github.com/RafuiiChan/nonebot_plugin_charpic/blob/main/LICENSE">
+  <a href="https://github.com/1umine/nonebot_plugin_charpic/blob/main/LICENSE">
     <img src="https://img.shields.io/badge/license-MIT-informational">
   </a>
   <a href="https://github.com/nonebot/nonebot2">
-    <img src="https://img.shields.io/badge/nonebot2-2.0.1-green">
+    <img src="https://img.shields.io/badge/nonebot2-red">
   </a>
   
 </p>
@@ -38,12 +38,11 @@ pip install nonebot_plugin_charpic
 
 ## 使用方法
 
-`字符画` + `图片`
+`字符画` + `图片`，图片支持从回复消息中获取
 
 ⚠ 需要 nonebot2 配置的命令前缀，如果没配置默认 `/` 
 
-## 问题
-
+## 可能遇到的问题
 
 ### 缺资源
 （没有字体的话可以尝试以下解决方案）
