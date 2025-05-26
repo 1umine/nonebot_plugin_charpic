@@ -1,4 +1,5 @@
 import io
+import ssl
 import imageio
 import httpx
 
@@ -10,6 +11,11 @@ from nonebot.log import logger
 default_font, font_size = Path(__file__).parent / "font" / "consola.ttf", 14
 default_font = str(default_font)
 util_draw = ImageDraw.Draw(Image.new("L", (1, 1)))
+
+ssl_context = ssl.create_default_context()
+ssl_context.options |= ssl.OP_NO_TLSv1 | ssl.OP_NO_TLSv1_1 | ssl.OP_NO_TLSv1_3
+ssl_context.set_ciphers("HIGH:!aNULL:!MD5")
+ntqq_img_client = httpx.AsyncClient(verify=ssl_context)
 
 
 async def get_pic_text(_img: Image.Image, new_w: int = 150):
@@ -86,10 +92,10 @@ async def char_pic(img: Image.Image):
 async def get_img(img_url: str):
     if not img_url:
         return
-    async with httpx.AsyncClient() as client:
-        result = await client.get(img_url)
-        if result.status_code != 200:
-            logger.warning(f"图片 {img_url} 下载失败: {result.status_code}")
-            return None
-        img = Image.open(io.BytesIO(result.content))
-        return img
+
+    result = await ntqq_img_client.get(img_url)
+    if result.status_code != 200:
+        logger.warning(f"图片 {img_url} 下载失败: {result.status_code}")
+        return None
+    img = Image.open(io.BytesIO(result.content))
+    return img
